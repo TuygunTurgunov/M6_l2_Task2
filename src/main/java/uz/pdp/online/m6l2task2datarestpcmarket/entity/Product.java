@@ -7,11 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import uz.pdp.online.m6l2task2datarestpcmarket.entity.template.AbsEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,18 +24,25 @@ public class Product extends AbsEntity {
     @OneToOne
     private Attachment attachmentPhoto;
 
-    @NotNull(message = "feature of product not be empty.")
-    private  String feature;
-
-    @ManyToOne
-    private Measurement measurement;
 
     @NotNull(message = "product code not be null")
     @Column(unique = true,nullable = false)
     private String productCode;
 
 
+    private Integer price;
+
+    @ManyToOne
+    private  Currency currency;
+
+    @ManyToOne
+    private Measurement measurement;
+
     private Integer guarantee;
+
+    @ManyToMany
+    private List<Value> value;
+
 
 
 }
